@@ -1,4 +1,4 @@
-package star.mcoknabe.dev.start2xy;
+package star.mcoknabe.dev.star2dm;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,32 +9,31 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import star.mcoknabe.dev.start2xy.model.StarContract;
-import star.mcoknabe.dev.start2xy.model.Stop;
-import star.mcoknabe.dev.start2xy.model.StopTime;
-import star.mcoknabe.dev.start2xy.model.Trip;
+import star.mcoknabe.dev.star2dm.model.StarContract;
+import star.mcoknabe.dev.star2dm.model.StopTime;
 
-import static star.mcoknabe.dev.start2xy.TwoFragment.agrsone;
+import static star.mcoknabe.dev.star2dm.FragmentTwo.agrsone;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ThreeFragment.OnFragmentInteractionListener} interface
+ * {@link FragmentThree.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ThreeFragment#newInstance} factory method to
+ * Use the {@link FragmentThree#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ThreeFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
+public class FragmentThree extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String ARG_PARAM1 = "param1";
     public static final String ARG_PARAM2 = "param2";
@@ -43,7 +42,6 @@ public class ThreeFragment extends Fragment {
     public static final String ARG_PARAM5 = "param5";
     public static final String ARG_PARAM6 = "param6";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private String mParam3;
@@ -59,7 +57,7 @@ public class ThreeFragment extends Fragment {
 
     List<StopTime> stopTimes = new ArrayList<>();
 
-    public ThreeFragment() {
+    public FragmentThree() {
         // Required empty public constructor
     }
 
@@ -69,11 +67,10 @@ public class ThreeFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ThreeFragment.
+     * @return A new instance of fragment FragmentThree.
      */
-    // TODO: Rename and change types and number of parameters
-    public static ThreeFragment newInstance(String param1, String param2) {
-        ThreeFragment fragment = new ThreeFragment();
+    public static FragmentThree newInstance(String param1, String param2) {
+        FragmentThree fragment = new FragmentThree();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -81,8 +78,8 @@ public class ThreeFragment extends Fragment {
         return fragment;
     }
 
-    public static ThreeFragment newInstance() {
-        ThreeFragment fragment = new ThreeFragment();
+    public static FragmentThree newInstance() {
+        FragmentThree fragment = new FragmentThree();
         return fragment;
     }
 
@@ -114,9 +111,12 @@ public class ThreeFragment extends Fragment {
         arret.setText(mParam4);
 
         ArrayList<String> values = new ArrayList<>();
-        for (StopTime timesp: gethoraire(""+mParam6,""+mParam5,""+MainActivity.dateFormat(mParam1),""+MainActivity.HeurFormat(mParam2)))
-        {
-            values.add(timesp.getArrivalTime());
+        try {
+            for (StopTime timesp: gethoraire(""+mParam6,""+mParam5,""+MainActivity.dateFormat(mParam1),""+MainActivity.HeurFormat(mParam2)))
+            {
+                values.add(timesp.getArrivalTime());
+            }
+        }catch (Exception e){
         }
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(),R.layout.arretlayout, values);
 
@@ -126,12 +126,12 @@ public class ThreeFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // - trip id - heur
-                agrsone.putString(ThreeFragment.ARG_PARAM1, ""+mParam1);
-                agrsone.putString(ThreeFragment.ARG_PARAM2, ""+mParam2);
-                agrsone.putString(ThreeFragment.ARG_PARAM3, ""+mParam3);
-                agrsone.putString(ThreeFragment.ARG_PARAM4, ""+stopTimes.get(i).getTripId());
-                agrsone.putString(ThreeFragment.ARG_PARAM5, ""+stopTimes.get(i).getArrivalTime());
-                agrsone.putString(ThreeFragment.ARG_PARAM6, ""+mParam4);
+                agrsone.putString(FragmentThree.ARG_PARAM1, ""+mParam1);
+                agrsone.putString(FragmentThree.ARG_PARAM2, ""+mParam2);
+                agrsone.putString(FragmentThree.ARG_PARAM3, ""+mParam3);
+                agrsone.putString(FragmentThree.ARG_PARAM4, ""+stopTimes.get(i).getTripId());
+                agrsone.putString(FragmentThree.ARG_PARAM5, ""+stopTimes.get(i).getArrivalTime());
+                agrsone.putString(FragmentThree.ARG_PARAM6, ""+mParam4);
 
                 Log.e("XXXX"," -> " + agrsone.toString())  ;
                 mListener.switchFrag(agrsone,4);
@@ -155,10 +155,8 @@ public class ThreeFragment extends Fragment {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-           // mListener.onFragmentInteraction(uri);
         }
     }
 
@@ -167,10 +165,7 @@ public class ThreeFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof MainActivity) {
             mListener = (MainActivity) context;
-        }/* else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
+        }
     }
 
     @Override
@@ -179,18 +174,7 @@ public class ThreeFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
@@ -198,13 +182,20 @@ public class ThreeFragment extends Fragment {
 
 
         String[] selargs = {arretId, busId, date,heure};
-        //String[] selargs = {"1258", "0005", "20180105","21:59:00"};
         Log.d("STARXTEST", "cursocount ..." + selargs[0] +" - "+ selargs[1] +" - "+ selargs[2] +" - "+ selargs[3] +" - " );
-        Cursor cursor = mListener.getContentResolver().query(Uri.withAppendedPath(StarContract.AUTHORITY_URI, StarContract.StopTimes.CONTENT_PATH),
-                null,
-                null,
-                selargs,
-                StarContract.StopTimes.StopTimeColumns.ARRIVAL_TIME);
+        Cursor cursor;
+        try {
+            cursor = mListener.getContentResolver().query(Uri.withAppendedPath(StarContract.AUTHORITY_URI, StarContract.StopTimes.CONTENT_PATH),
+                    null,
+                    null,
+                    selargs,
+                    StarContract.StopTimes.StopTimeColumns.ARRIVAL_TIME);
+        }catch (Exception e){
+            Log.e("STARXTEST", "List<StopTime> null");
+            return null;
+        }
+
+
         Log.d("STARXTEST", "cursocount ..." + cursor.getCount());
         if (cursor.moveToFirst()){
             do {

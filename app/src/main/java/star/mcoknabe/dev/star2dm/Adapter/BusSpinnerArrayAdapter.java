@@ -1,8 +1,7 @@
-package star.mcoknabe.dev.start2xy.Adapter;
+package star.mcoknabe.dev.star2dm.Adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,8 +14,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import star.mcoknabe.dev.start2xy.R;
-import star.mcoknabe.dev.start2xy.model.BusRoute;
+import star.mcoknabe.dev.star2dm.R;
+import star.mcoknabe.dev.star2dm.model.BusRoute;
 
 /**
  * Created by matok on 05/01/2018.

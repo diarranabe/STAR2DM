@@ -1,8 +1,6 @@
-package star.mcoknabe.dev.start2xy;
+package star.mcoknabe.dev.star2dm;
 
-import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -10,13 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import star.mcoknabe.dev.start2xy.Adapter.BusListAdapter;
-import star.mcoknabe.dev.start2xy.Adapter.BusSpinnerArrayAdapter;
-
-import static android.view.View.*;
+import star.mcoknabe.dev.star2dm.Adapter.BusListAdapter;
 
 /**
  * Created by matok on 05/01/2018.
@@ -33,15 +27,14 @@ public class BusPicker extends DialogFragment  {
         getDialog().setTitle("Bus List");
         myList = (ListView) rootView.findViewById(R.id.listViewbus) ;
 
-        final BusListAdapter adapter = new BusListAdapter(this.getContext(),   One.getBusRoute() );
-       // BusSpinnerArrayAdapter adapter0 = new BusSpinnerArrayAdapter(this.getContext(),  R.layout.itenspinner, One.getBusRoute() );
+        final BusListAdapter adapter = new BusListAdapter(this.getContext(),   FragmentOne.getBusRoute() );
         myList.setAdapter(adapter);
          onefragA =   this.getActivity();
 
         myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                One onefrag = (One)   onefragA.getSupportFragmentManager().findFragmentByTag("firstFragment");
+                FragmentOne onefrag = (FragmentOne)   onefragA.getSupportFragmentManager().findFragmentByTag("firstFragment");
                 onefrag.updatebus(adapter.getItem(i));
                 getDialog().cancel();
 

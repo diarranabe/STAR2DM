@@ -1,4 +1,4 @@
-package star.mcoknabe.dev.start2xy.model;
+package star.mcoknabe.dev.star2dm.model;
 
 /**
  * Created by matok on 07/01/2018.

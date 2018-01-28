@@ -1,4 +1,4 @@
-package star.mcoknabe.dev.start2xy;
+package star.mcoknabe.dev.star2dm;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -12,28 +12,26 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import star.mcoknabe.dev.start2xy.model.BusRoute;
-import star.mcoknabe.dev.start2xy.model.StarContract;
-import star.mcoknabe.dev.start2xy.model.Stop;
+import star.mcoknabe.dev.star2dm.model.BusRoute;
+import star.mcoknabe.dev.star2dm.model.StarContract;
+import star.mcoknabe.dev.star2dm.model.Stop;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TwoFragment.OnFragmentInteractionListener} interface
+ * {@link FragmentTwo.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link TwoFragment#newInstance} factory method to
+ * Use the {@link FragmentTwo#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TwoFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
+public class FragmentTwo extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String ARG_PARAM1 = "param1";
     public static final String ARG_PARAM2 = "param2";
@@ -42,7 +40,6 @@ public class TwoFragment extends Fragment {
     public static final String ARG_PARAM5 = "param5";
     public static final String ARG_PARAM6 = "param6";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private String mParam3;
@@ -66,7 +63,7 @@ public class TwoFragment extends Fragment {
 
     private MainActivity mListener;
 
-    public TwoFragment() {
+    public FragmentTwo() {
         // Required empty public constructor
     }
 
@@ -76,11 +73,10 @@ public class TwoFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TwoFragment.
+     * @return A new instance of fragment FragmentTwo.
      */
-    // TODO: Rename and change types and number of parameters
-    public static TwoFragment newInstance(BusRoute param1, int param2) {
-        TwoFragment fragment = new TwoFragment();
+    public static FragmentTwo newInstance(BusRoute param1, int param2) {
+        FragmentTwo fragment = new FragmentTwo();
         Bundle args = new Bundle();
         args.putSerializable(ARG_PARAM1, (Serializable) param1);
         args.putInt(ARG_PARAM2, param2);
@@ -88,8 +84,8 @@ public class TwoFragment extends Fragment {
         return fragment;
     }
 
-    public static TwoFragment newInstance() {
-        TwoFragment fragment = new TwoFragment();
+    public static FragmentTwo newInstance() {
+        FragmentTwo fragment = new FragmentTwo();
         return fragment;
     }
 
@@ -128,19 +124,18 @@ public class TwoFragment extends Fragment {
 
         dateHeur.setText(mParam1+" / "+ mParam2);
         labeBus.setText(""+mParam3);
-        // direction a chercher !
         direction.setText(mParam4);
 
         listViewArret.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //stop ie - trip id - heur date
-                agrsone.putString(ThreeFragment.ARG_PARAM1, ""+mParam1); // heure
-                agrsone.putString(ThreeFragment.ARG_PARAM2, ""+mParam2); // date
-                agrsone.putString(ThreeFragment.ARG_PARAM3, ""+mParam3); //destination
-                agrsone.putString(ThreeFragment.ARG_PARAM4, ""+adapter.getItem(i)); // arret
-                agrsone.putString(ThreeFragment.ARG_PARAM5, ""+mParam5); // id route
-                agrsone.putString(ThreeFragment.ARG_PARAM6, ""+stops.get(i).getId()); //  id trip
+                agrsone.putString(FragmentThree.ARG_PARAM1, ""+mParam1); // heure
+                agrsone.putString(FragmentThree.ARG_PARAM2, ""+mParam2); // date
+                agrsone.putString(FragmentThree.ARG_PARAM3, ""+mParam3); //destination
+                agrsone.putString(FragmentThree.ARG_PARAM4, ""+adapter.getItem(i)); // arret
+                agrsone.putString(FragmentThree.ARG_PARAM5, ""+mParam5); // id route
+                agrsone.putString(FragmentThree.ARG_PARAM6, ""+stops.get(i).getId()); //  id trip
 
                 Log.e("XXXX"," ->  " + agrsone.toString())  ;
                 mListener.switchFrag(agrsone,3);
@@ -155,7 +150,6 @@ public class TwoFragment extends Fragment {
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
           //  mListener.onFragmentInteraction(uri);
@@ -167,10 +161,7 @@ public class TwoFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof MainActivity) {
             mListener = (MainActivity) context;
-        } /*else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
+        }
     }
 
     @Override
@@ -192,13 +183,8 @@ public class TwoFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 

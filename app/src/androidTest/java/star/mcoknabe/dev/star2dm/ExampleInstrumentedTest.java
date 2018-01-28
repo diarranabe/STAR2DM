@@ -1,4 +1,4 @@
-package star.mcoknabe.dev.start2xy;
+package star.mcoknabe.dev.star2dm;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

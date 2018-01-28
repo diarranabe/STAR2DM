@@ -1,4 +1,4 @@
-package star.mcoknabe.dev.start2xy.Adapter;
+package star.mcoknabe.dev.star2dm.Adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

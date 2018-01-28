@@ -1,4 +1,4 @@
-package star.mcoknabe.dev.start2xy;
+package star.mcoknabe.dev.star2dm;
 
 import android.app.ProgressDialog;
 import android.database.Cursor;
@@ -6,8 +6,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,10 +13,11 @@ import android.view.View;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-import star.mcoknabe.dev.start2xy.model.BusRoute;
-import star.mcoknabe.dev.start2xy.model.StarContract;
+import star.mcoknabe.dev.star2dm.model.BusRoute;
+import star.mcoknabe.dev.star2dm.model.StarContract;
 
 public class MainActivity extends FragmentActivity implements DeptListener{
 
@@ -36,10 +35,10 @@ public class MainActivity extends FragmentActivity implements DeptListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            one = One.newInstance();
-            twoFragment = TwoFragment.newInstance();
-            threeFragment = ThreeFragment.newInstance();
-            fourFragment = FourFragment.newInstance();
+            one = FragmentOne.newInstance();
+            twoFragment = FragmentTwo.newInstance();
+            threeFragment = FragmentThree.newInstance();
+            fourFragment = FragmentFour.newInstance();
             ft =  getSupportFragmentManager();
 
         }
@@ -56,7 +55,7 @@ public class MainActivity extends FragmentActivity implements DeptListener{
             }
 
             // Create a new Fragment to be placed in the activity layout
-            One firstFragment = new One();
+            FragmentOne firstFragment = new FragmentOne();
             Calendar c = Calendar.getInstance();
             SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
             SimpleDateFormat tf = new SimpleDateFormat("HH:mm:ss");
@@ -65,8 +64,8 @@ public class MainActivity extends FragmentActivity implements DeptListener{
 
             Bundle args = new Bundle();
 
-            args.putString(One.ARG_PARAM1, formattedTime);
-            args.putString(One.ARG_PARAM2, formattedDate);
+            args.putString(FragmentOne.ARG_PARAM1, formattedTime);
+            args.putString(FragmentOne.ARG_PARAM2, formattedDate);
 
 
 
@@ -102,9 +101,9 @@ public class MainActivity extends FragmentActivity implements DeptListener{
 
         switch (i){
             case 1:
-                one = (One) ft.findFragmentByTag("firstFragment");
+                one = (FragmentOne) ft.findFragmentByTag("firstFragment");
                 if (one == null){
-                    one = new One();
+                    one = new FragmentOne();
                 }
                 one.setArguments(args);
                 ft.beginTransaction().replace(R.id.fragment_container, one)
@@ -117,7 +116,6 @@ public class MainActivity extends FragmentActivity implements DeptListener{
                     Log.e("XXXX","one is on caontainer" ) ;
                 }
                 twoFragment.setArguments(args);
-               // ft.beginTransaction().remove(one).commit();
                 ft.executePendingTransactions();
                 ft.beginTransaction().replace(R.id.fragment_container,twoFragment,"twoFragment")
                         .addToBackStack("firstFragment")
@@ -133,8 +131,8 @@ public class MainActivity extends FragmentActivity implements DeptListener{
                         .commit();
                 break;
             case 4:
-                fourFragment = (FourFragment) ft.findFragmentByTag("fourFragment");
-                if (fourFragment == null)fourFragment = new FourFragment();
+                fourFragment = (FragmentFour) ft.findFragmentByTag("fourFragment");
+                if (fourFragment == null)fourFragment = new FragmentFour();
                 fourFragment.setArguments(args);
                 ft.beginTransaction().replace(R.id.fragment_container, fourFragment)
                         .addToBackStack("firstFragment")
@@ -171,7 +169,14 @@ public class MainActivity extends FragmentActivity implements DeptListener{
     }
 
     public static String dateFormat(String date){
-        String [] d = date.split("-");
+        String [] d;
+        try {
+            d = date.split("-");
+        }catch (Exception e){
+            String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            Log.e("STARX 2",timeStamp);
+            d = timeStamp.split("-");
+        }
         int var  = 1 ;
         try {
             var = Integer.valueOf(d[1]);
@@ -218,7 +223,17 @@ public class MainActivity extends FragmentActivity implements DeptListener{
     }
 
     public static String HeurFormat(String date){
-        String [] d = date.split(":");
+//        String [] d = date.split(":");
+        String [] d;
+        try {
+            Log.e("STARX",date);
+            d = date.split(":");
+        }catch (Exception e){
+            String timeStamp = new SimpleDateFormat("yyyy:MM:dd").format(new Date());
+            Log.e("STARX 2",timeStamp);
+            d = timeStamp.split(":");
+        }
+
         for (int i = 0; i<d.length; i++){
             Integer in = Integer.valueOf(d[i]);
             if (in<10){

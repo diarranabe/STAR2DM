@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:screenOrientation="portrait"
     android:layout_height="match_parent"
-    tools:context="star.mcoknabe.dev.start2xy.TwoFragment">
+    tools:context="star.mcoknabe.dev.star2dm.FragmentTwo">
 
     <!-- TODO: Update blank fragment layout -->
 

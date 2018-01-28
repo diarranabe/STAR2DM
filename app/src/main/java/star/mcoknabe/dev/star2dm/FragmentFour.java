@@ -1,4 +1,4 @@
-package star.mcoknabe.dev.start2xy;
+package star.mcoknabe.dev.star2dm;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,28 +9,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import star.mcoknabe.dev.start2xy.Adapter.ArretListAdapter;
-import star.mcoknabe.dev.start2xy.model.ArretTime;
-import star.mcoknabe.dev.start2xy.model.StarContract;
-import star.mcoknabe.dev.start2xy.model.Stop;
-import star.mcoknabe.dev.start2xy.model.StopTime;
-
-import static star.mcoknabe.dev.start2xy.TwoFragment.agrsone;
+import star.mcoknabe.dev.star2dm.model.ArretTime;
+import star.mcoknabe.dev.star2dm.model.StarContract;
 
 
-
-public class FourFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
+public class FragmentFour extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -39,7 +29,6 @@ public class FourFragment extends Fragment {
     private static final String ARG_PARAM5 = "param5";
     private static final String ARG_PARAM6 = "param6";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private String mParam3;
@@ -54,7 +43,7 @@ public class FourFragment extends Fragment {
     TextView dedtination ;
     ListView arretHeurList ;
 
-    public FourFragment() {
+    public FragmentFour() {
 
         // Required empty public constructor
     }
@@ -65,19 +54,18 @@ public class FourFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FourFragment.
+     * @return A new instance of fragment FragmentFour.
      */
-    // TODO: Rename and change types and number of parameters
-    public static FourFragment newInstance(String param1, String param2) {
-        FourFragment fragment = new FourFragment();
+    public static FragmentFour newInstance(String param1, String param2) {
+        FragmentFour fragment = new FragmentFour();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
-    public static FourFragment newInstance() {
-        FourFragment fragment = new FourFragment();
+    public static FragmentFour newInstance() {
+        FragmentFour fragment = new FragmentFour();
         return fragment;
     }
 
@@ -116,8 +104,7 @@ public class FourFragment extends Fragment {
 
         dateheur.setText(mParam1+" / "+ mParam2);
         ligne.setText(""+mParam6);
-        // direction a chercher !
-        dedtination.setText(mParam4);
+        dedtination.setText("À partir de cet arrêt");
 
         // Inflate the layout for this fragment
         return view;
@@ -131,24 +118,20 @@ public class FourFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof MainActivity) {
             mListener = (MainActivity) context;
-        }/* else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        arretTimes.clear();
 
     }
 
 
     public List<ArretTime> getArretHeur(String idTrip, String heur) {
 
-
-        //String[] selargs = {"19061", "22:30:00"};
         String[] selargs = {idTrip, heur};
         Cursor cursor = mListener.getContentResolver().query(Uri.withAppendedPath(StarContract.AUTHORITY_URI, "arrettoterminus"),
                 null, null, selargs,

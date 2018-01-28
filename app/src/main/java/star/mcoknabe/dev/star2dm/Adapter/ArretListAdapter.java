@@ -1,22 +1,17 @@
-package star.mcoknabe.dev.start2xy.Adapter;
+package star.mcoknabe.dev.star2dm.Adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
-import star.mcoknabe.dev.start2xy.FourFragment;
-import star.mcoknabe.dev.start2xy.R;
-import star.mcoknabe.dev.start2xy.ThreeFragment;
-import star.mcoknabe.dev.start2xy.model.ArretTime;
-import star.mcoknabe.dev.start2xy.model.BusRoute;
+import star.mcoknabe.dev.star2dm.R;
+import star.mcoknabe.dev.star2dm.model.ArretTime;
 
 /**
  * Created by matok on 06/01/2018.

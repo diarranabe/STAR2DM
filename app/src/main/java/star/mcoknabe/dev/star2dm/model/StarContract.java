@@ -1,4 +1,4 @@
-package star.mcoknabe.dev.start2xy.model;
+package star.mcoknabe.dev.star2dm.model;
 import android.net.Uri;
 import android.provider.BaseColumns;
 

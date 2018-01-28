@@ -1,4 +1,4 @@
-package star.mcoknabe.dev.start2xy;
+package star.mcoknabe.dev.star2dm;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -7,7 +7,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.widget.DatePicker;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -35,7 +34,7 @@ public class DatePickerFragment  extends DialogFragment implements DatePickerDia
 
         FragmentActivity onefragA =   this.getActivity();
 
-        One onefrag = (One)   onefragA.getSupportFragmentManager().findFragmentByTag("firstFragment");
+        FragmentOne onefrag = (FragmentOne)   onefragA.getSupportFragmentManager().findFragmentByTag("firstFragment");
 
         onefrag.updatedate(day+"-"+month+"-"+year);
     }

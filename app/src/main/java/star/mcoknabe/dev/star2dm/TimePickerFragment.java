@@ -1,11 +1,10 @@
-package star.mcoknabe.dev.start2xy;
+package star.mcoknabe.dev.star2dm;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.LoaderManager;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
@@ -33,7 +32,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
         FragmentActivity onefragA =   this.getActivity();
 
-        One onefrag = (One)   onefragA.getSupportFragmentManager().findFragmentByTag("firstFragment");
+        FragmentOne onefrag = (FragmentOne)   onefragA.getSupportFragmentManager().findFragmentByTag("firstFragment");
         onefrag.updatetimer(hourOfDay+":"+minute);
 
     }
